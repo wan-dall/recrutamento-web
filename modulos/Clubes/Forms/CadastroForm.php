@@ -2,11 +2,12 @@
 namespace Teste\Clubes\Forms;
 
 use WTForms\Form;
+use WTForms\Fields\Simple\HiddenField;
 use WTForms\Fields\Core\StringField;
 use WTForms\Validators\InputRequired;
 use WTForms\Validators\Length;
 
-use \Teste\Config;
+use Teste\Config;
 use Teste\Forms\Validators\OnlyContains;
 
 require Config::lnkAb('validacoes') . 'OnlyContains.php';
