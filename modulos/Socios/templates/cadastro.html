@@ -1,0 +1,44 @@
+{% extends 'estrutura/baseEstrutura.html' %}
+
+{% set clubes_ativo = ' active' %}
+
+{% block titulo %}Novo Clube{% endblock %}
+
+{% block conteudo %}
+    <div class="row titulo">
+        <div class="col">
+            <h3 class=" pull-left">
+                {% if clube %}
+                    Editar clube <i>'{{ clube.nome }}'</i>
+                {% else %}
+                    Novo Clube
+                {% endif %}
+            </h3>
+        </div>
+    </div>
+    <div class="row no-gutters">
+        <div class="form-control rounded">
+            <form method="POST">
+                <div class="form-group row">
+                    <div class="col">
+                        {{ form.nome.label|raw }}
+                        {{ form.nome|raw }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-left">
+                        <a href="{{ url_clubes }}" class="btn btn-warning btn_voltar">
+                            <span class="fa fa-arrow-left"></span>
+                            Voltar
+                        </a>
+                    </div>
+                    <div class="col text-right">
+                        <button type="submit" class="btn btn-success">
+                            Salvar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
