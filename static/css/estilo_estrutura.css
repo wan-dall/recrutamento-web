@@ -1,0 +1,43 @@
+/*
+    Created on : Mar 9, 2017, 20:14:34
+    Author     : wan-dall
+*/
+
+/* ------------- GERAL ---------------- */
+#conteudo {
+    padding-top: 65px;
+}
+
+.input_error INPUT {
+    border: 1px solid red !important;
+}
+
+.table {
+    margin-top: 15px;
+}
+
+.titulo {
+    margin-bottom: 10px;
+}
+
+.botao_form {
+    padding-top: 1.78rem;
+}
+/* ------------- TESTES ----------------- */
+
+Hs3 {
+    border: 1px solid green
+}
+
+.teste {
+    border: 1px solid red;
+}
+
+/* ------------- Pedidos de Vendas --------- */
+.legendas_pedidos {
+    margin-top: 15px;
+}
+
+.legendas_pedidos SPAN {
+    margin-right: 5px;
+}

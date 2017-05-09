@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <title>Teste - {% block titulo %}{% endblock %}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{ url_css }}bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="{{ url_css }}tether.min.css" />
+        <link rel="stylesheet" type="text/css" href="{{ url_css }}estilo_estrutura.css" />
+        <link rel="stylesheet" type="text/css" href="{{ url_css }}font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="{{ url_css }}estilo.css" />
+        {% block css_inline %}{% endblock %}
+    </head>
+    <body id="topo"{{ extras }}>
+        {% block conteudo_base %}{% endblock %}
+        {% include 'estrutura/modal.html' %}
+        <script type="text/javascript" src="{{ url_js }}jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="{{ url_js }}tether.min.js"></script>
+        <script type="text/javascript" src="{{ url_js }}bootstrap.min.js"></script>
+        <script type="text/javascript" src="{{ url_js }}jquery.mask-1.14.10.min.js"></script>
+        <script type="text/javascript" src="{{ url_js }}jquery.blockUI.js"></script>
+        <script type="text/javascript" src="{{ url_js }}funcoes.js"></script>
+        <script type="text/javascript" src="{{ url_js }}jquery.stickytableheaders.min.js"></script>
+        {% block js_inline %}{% endblock %}
+    </body>
+</html>

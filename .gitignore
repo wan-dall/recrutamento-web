@@ -1,0 +1,6 @@
+/nbproject/private/
+*~
+doc/
+doc2/
+vendor/
+composer.phar

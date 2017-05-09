@@ -1,0 +1,20 @@
+{% if flashed %}
+    <div class="flash">
+        {% set va = '' %}
+        {% for f in flashed %}
+            {%- if va != f.tipo -%}
+                {%- set va = f.tipo -%}
+                {%- if loop.index > 1 -%}
+                    </div>
+                {%- endif -%}
+                <div class="alert alert-{{ f.tipo }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            {%- endif -%}
+            {{ f.mensagem }}<br />
+        {% endfor %}
+        {# encerra div do último elemento #}
+        </div>
+    </div>
+{% endif %}

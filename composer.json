@@ -1,0 +1,8 @@
+{
+    "require": {
+        "deathnerd/php-wtforms":"0.5.2",
+        "doctrine/dbal": "^2.5",
+        "leaseweb/doctrine-pdo-dblib": "^1.1",
+        "twig/twig": "~1.0"
+    }
+}

@@ -1,0 +1,22 @@
+{% extends 'estrutura/base.html' %}
+
+{% block conteudo_base %}
+    <div class="container-fluid">
+        <nav id="header" class="navbar fixed-top navbar-toggleable-sm navbar-light bg-faded">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" 
+                    data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" 
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url_root }}">Teste</a>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                {% include 'estrutura/menu.html' %}
+            </div>
+        </nav>
+    </div>
+    <div id="conteudo" class="container-fluid">
+        {% include 'estrutura/flashed.html' %}
+        {% block conteudo %}{% endblock %}
+    </div>
+{% endblock conteudo_base %}
