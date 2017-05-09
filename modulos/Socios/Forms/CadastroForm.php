@@ -30,7 +30,7 @@ class CadastroForm extends Form {
                 new Length("Nome deve ter entre %(min)d e %(max)d caracteres",
                         ['min' => 2, 'max'=> 150]),
                 new OnlyContains('Nome deve conter apenas os caracteres a-z, 0-9, -, _, . e espaços.',
-                        ['valid_members' => '/[\w\s\-\.]/']),
+                        ['valid_members' => '/[\w\s\-\.]/u']),
                 ],
             ]);
 

@@ -119,8 +119,8 @@ class Cadastro extends Socios {
 
                     Base::flash(sprintf("Sócio '%s' %s com sucesso", $form->nome->data, ($id ? 'alterado' : 'cadastrado')), 'success');
                     Base::redirect('socios');
-                } catch (\Exception $ex) {
-                    Base::flash('Erro ao tentar salvar Sócio: ' . $ex);
+                } catch (\Exception $e){
+                    Base::flash("Aconteceu um erro ao tentar salvar os dados. Por favor tente novamente em alguns segundos", 'danger');
                 }
             }
 
@@ -150,3 +150,38 @@ class Cadastro extends Socios {
         ));
     }
 }
+
+
+/**
+ * Remove sócio via ajax;
+ */
+class Remove extends Socios {
+
+    public function __construct() {
+        parent::__construct();
+
+        //Valida id passado
+        if (isset($_POST['id']) && is_numeric($_POST['id'])){
+            $id = $_POST['id'];
+
+            try {
+                $db = DBAL::getInstance();
+
+                $qb = $db->queryBuilder();
+                $expr = $qb->expr();
+                //Remove Clube
+                $qb->delete('socios')
+                        ->where($expr->eq('id', ':id'));
+
+                $db->executeQueryBuilder($qb, ['id' => $id]);
+
+                Base::flash('Sócio removido', 'success');
+
+            } catch (\Exception $e){
+                //$mensagem = 'nok' . $e->getMessage();
+                Base::flash('Erro ao tentar remover Sócio. Por favor tente novamente em alguns segundos', 'danger');
+            }
+        }
+    }
+}
+

@@ -14,36 +14,55 @@
         </div>
     </div>
 
-    {% if socios %}
-        <table class="table table-striped table-hover">
-            <thead>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Clube</th>
+                <th>Sócio</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in socios %}
                 <tr>
-                    <th>Clube</th>
-                    <th>Sócio</th>
-                    <th>&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for s in socios %}
-                    <tr>
-                        <td>
+                    <td>
+                        {% if s.clube %}
                             <a href="{{ url_clubes }}cadastro/{{ s.cid }}/">{{ s.clube }}</a>
-                        </td>
-                        <td>
-                            <a href="{{ url_socios }}cadastro/{{ s.sid }}/">{{ s.socio }}</a>
-                        </td>
-                        <td class="text-right">
-                            <a href="#" class="fa fa-trash-o text-danger"></a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <div class="row">
-            <div class="col text-center">
-                <i>Nenhum sócio cadastrado</i>
-            </div>
-        </div>
-    {% endif %}
+                        {% else %}
+                            <i class="text-muted">Clube Removido</i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_socios }}cadastro/{{ s.sid }}/">{{ s.socio }}</a>
+                    </td>
+                    <td class="text-right">
+                        <a href="#" class="fa fa-trash-o text-danger remover_socio" data-id="{{ s.sid }}" data-nome="{{ s.socio }}"></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td class="text-center" colspan="3">
+                        <i>Nenhum sócio cadastrado</i>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block js_inline %}
+    <script type="text/javascript">
+        $('.remover_socio').on('click', function(){
+            var id = $(this).attr('data-id');
+            var nome = $(this).attr('data-nome');
+            
+            var data = {'id': id};
+            
+            if (confirm("Tem certeza que deseja remover o sócio '" + nome + "'?")){
+                enviaForm3(data, '{{ url_socios }}remove/', $(this), function(){
+                    document.location.reload();
+                });
+            }
+        });
+    </script>
 {% endblock %}
