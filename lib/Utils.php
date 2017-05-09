@@ -71,7 +71,11 @@ class Utils {
             //Adiciona campos que tenham valores definidos ou
             //Adiciona campos que não tenham valores mas tenham default definido
             if ($campo->data or (!$campo->data and $campo->default)){
-                $valor = $like_ini . trim(($campo->data ?: $campo->default)) . $like_fin;
+                if (is_array($campo->data)){
+                    $valor = $campo->data;
+                } else {
+                    $valor = $like_ini . trim(($campo->data ?: $campo->default)) . $like_fin;
+                }
                 $params += [$campo->name => $valor];
             }
             //Campos que não tenham valor ou default definidos devem ser removidos
