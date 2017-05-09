@@ -1,0 +1,45 @@
+{% extends 'estrutura/baseEstrutura.html' %}
+
+{% set clubes_ativo = ' active' %}
+
+{% block titulo %}Clubes{% endblock %}
+
+{% block conteudo %}
+    <div class="row titulo">
+        <div class="col-md-10">
+            <h3 class=" pull-left">Clubes</h3>
+        </div>
+        <div class="col-sm-12 col-md-2">
+            <a href="{{ url_clubes }}cadastro/" class="btn btn-success pull-right col">Novo Clube</a>
+        </div>
+    </div>
+
+    {% if clubes %}
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Clube</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in clubes %}
+                    <tr>
+                        <td>
+                            <a href="{{ url_clubes }}cadastro/{{ c.id }}/">{{ c.nome }}</a>
+                        </td>
+                        <td class="text-right">
+                            <a href="#" class="fa fa-trash-o text-danger"></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="row">
+            <div class="col text-center">
+                <i>Nenhum clube cadastrado</i>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
