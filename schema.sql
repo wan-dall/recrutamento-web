@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `recrutamento-web`.`clubes` (
   `nome` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `nome_UNIQUE` (`nome` ASC))
-ENGINE = InnoDB;
+ENGINE = MyISAM;
 
 
 -- -----------------------------------------------------
@@ -35,16 +35,10 @@ DROP TABLE IF EXISTS `recrutamento-web`.`socios` ;
 
 CREATE TABLE IF NOT EXISTS `recrutamento-web`.`socios` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(150) NULL,
-  `clube_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `clube_id`),
-  INDEX `fk_socios_clubes_idx` (`clube_id` ASC),
-  CONSTRAINT `fk_socios_clubes`
-    FOREIGN KEY (`clube_id`)
-    REFERENCES `recrutamento-web`.`clubes` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  `nome` VARCHAR(150) NOT NULL,
+  `clube_id` INT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = MyISAM;
 
 SET SQL_MODE = '';
 GRANT USAGE ON *.* TO recrutamento_web;
