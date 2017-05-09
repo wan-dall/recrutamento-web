@@ -14,25 +14,23 @@
         </div>
     </div>
 
-    {% if clubes %}
+    {% if socios %}
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
+                    <th>Clube</th>
                     <th>Sócio</th>
-                    <th>Clube(s)</th>
                     <th>&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
-                {% for c in clubes %}
+                {% for s in socios %}
                     <tr>
                         <td>
-                            <a href="{{ url_socios }}cadastro/{{ c.id }}/">{{ c.nome }}</a>
+                            <a href="{{ url_clubes }}cadastro/{{ s.cid }}/">{{ s.clube }}</a>
                         </td>
                         <td>
-                            <a href="{{ url_socios }}cadastro/{{ c.id }}/">{{ c.nome }}</a>
-                            <br />
-                            <a href="{{ url_socios }}cadastro/{{ c.id }}/">{{ c.nome }}</a>
+                            <a href="{{ url_socios }}cadastro/{{ s.sid }}/">{{ s.socio }}</a>
                         </td>
                         <td class="text-right">
                             <a href="#" class="fa fa-trash-o text-danger"></a>

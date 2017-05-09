@@ -1,17 +1,17 @@
 {% extends 'estrutura/baseEstrutura.html' %}
 
-{% set clubes_ativo = ' active' %}
+{% set socios_ativo = ' active' %}
 
-{% block titulo %}Novo Clube{% endblock %}
+{% block titulo %}Novo Sócio{% endblock %}
 
 {% block conteudo %}
     <div class="row titulo">
         <div class="col">
             <h3 class=" pull-left">
-                {% if clube %}
-                    Editar clube <i>'{{ clube.nome }}'</i>
+                {% if socio %}
+                    Editar Sócio <i>'{{ socio.nome }}'</i>
                 {% else %}
-                    Novo Clube
+                    Novo Sócio
                 {% endif %}
             </h3>
         </div>
@@ -23,6 +23,9 @@
                     <div class="col">
                         {{ form.nome.label|raw }}
                         {{ form.nome|raw }}
+
+                        {{ form.clube_id.label|raw }}
+                        {{ form.clube_id|raw }}
                     </div>
                 </div>
                 <div class="row">

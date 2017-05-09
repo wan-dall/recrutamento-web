@@ -30,6 +30,7 @@ class Socios extends Base {
 
 /**
  * Tela inicial do módulo de sócios
+ * Traz lista ordenada pelo clube e depois pelo sócio
  */
 class Index extends Socios {
 
@@ -39,14 +40,16 @@ class Index extends Socios {
         $db = DBAL::getInstance();
 
         $qb = $db->queryBuilder();
-        $qb->select('id', 'nome')
-                ->from('clubes')
-                ->orderBy('nome');
+        $expr = $qb->expr();
+        $qb->select('c.id cid', 'c.nome clube', 's.id sid', 's.nome socio')
+                ->from('socios', 's')
+                ->leftJoin('s', 'clubes', 'c', $expr->eq('s.clube_id', 'c.id'))
+                ->orderBy('c.nome, s.nome');
 
-        $clubes = $db->executeQueryBuilder($qb);
+        $socios = $db->executeQueryBuilder($qb);
 
         self::display('@socios/index.html', array(
-            'clubes' => $clubes,
+            'socios' => $socios,
         ));
     }
 }
@@ -83,26 +86,30 @@ class Cadastro extends Socios {
                 }
             } else {
                 //Se a validação for positiva redireciona para tela de
-                //listagem de clubes e exibe mensagem sobre o sucesso
+                //listagem de sócios e exibe mensagem sobre o sucesso
                 //da operação.
 
                 //Parâmetros preparado para query
                 $params = Utils::preparaForm($form);
 
                 try {
-
                     if ($id){
                         //Se houver id atualiza clube selecionado
                         $expr = $qb->expr();
-                        $qb->update('clubes')
-                            ->set('nome', ':nome')
-                            ->where($expr->eq('id', ':id'));
+                        $qb->update('socios')
+                                ->set('nome', ':nome')
+                                ->set('clube_id', ':clube_id')
+                                ->where($expr->eq('id', ':id'));
 
                         //Adiciona id nos parâmetros para query
                         $params += ['id' => $id];
+
                     } else {
-                        $qb->insert('clubes')
-                            ->values(['nome' => ':nome']);
+                        $qb->insert('socios')
+                                ->values([
+                                    'nome' => ':nome',
+                                    'clube_id' => ':clube_id'
+                                    ]);
                     }
 
                     //Executa QueryBuilder passando campos para processamento
@@ -110,11 +117,10 @@ class Cadastro extends Socios {
                     //@see Utils::preparaForm
                     $db->executeQueryBuilder($qb, $params);
 
-                    Base::flash(sprintf("Clube '%s' %s com sucesso", $form->nome->data, ($id ? 'alterado' : 'cadastrado')), 'success');
-                    Base::redirect('clubes');
-
-                } catch (Exception $ex) {
-                    Base::flash('Erro ao tentar salvar clube: ' . $ex);
+                    Base::flash(sprintf("Sócio '%s' %s com sucesso", $form->nome->data, ($id ? 'alterado' : 'cadastrado')), 'success');
+                    Base::redirect('socios');
+                } catch (\Exception $ex) {
+                    Base::flash('Erro ao tentar salvar Sócio: ' . $ex);
                 }
             }
 
@@ -124,17 +130,17 @@ class Cadastro extends Socios {
         $clube = False;
         if ($id){
             $expr = $qb->expr();
-            $qb->select('nome')
-                    ->from('clubes')
+            $qb->select('nome', 'clube_id')
+                    ->from('socios')
                     ->where($expr->eq('id', ':id'));
-
-            $clube = $db->executeQueryBuilder($qb, ['id' => $id])->fetch();
+            
+            $socio = $db->executeQueryBuilder($qb, ['id' => $id])->fetch();
 
             //Se existir cadastro preenche o Form
-            if ($clube){
-                $form = Utils::PreencheForm($form, $clube);
+            if ($socio){
+                $form = Utils::PreencheForm($form, $socio);
             } else {
-                Base::raise();
+                //raise 404;
             }
         }
 
