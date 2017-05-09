@@ -1,6 +1,8 @@
 <?php
 namespace Teste\Clubes;
 
+use \Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+
 use Teste\Base;
 use Teste\Config;
 use Teste\DBAL;
@@ -108,13 +110,16 @@ class Cadastro extends Clubes {
                     //Executa QueryBuilder passando campos para processamento
                     //pelo DBAL
                     //@see Utils::preparaForm
+
                     $db->executeQueryBuilder($qb, $params);
 
                     Base::flash(sprintf("Clube '%s' %s com sucesso", $form->nome->data, ($id ? 'alterado' : 'cadastrado')), 'success');
                     Base::redirect('clubes');
 
-                } catch (Exception $ex) {
-                    Base::flash('Erro ao tentar salvar clube: ' . $ex);
+                } catch (UniqueConstraintViolationException $e) {
+                    Base::flash("Nome de Clube '" . $form->nome->data . "' já em uso", 'danger');
+                } catch (\Exception $e){
+                    Base::flash("Aconteceu um erro ao tentar salvar os dados. Por favor tente novamente em alguns segundos", 'danger');
                 }
             }
 
@@ -134,7 +139,8 @@ class Cadastro extends Clubes {
             if ($clube){
                 $form = Utils::PreencheForm($form, $clube);
             } else {
-                //raise 404;
+                Base::flash('Clube não encontrado', 'warning');
+                Base::redirect('clubes');
             }
         }
 
@@ -142,5 +148,45 @@ class Cadastro extends Clubes {
             'form' => $form,
             'clube' => $clube,
         ));
+    }
+}
+
+
+/**
+ * Remove clube via ajax;
+ */
+class Remove extends Clubes {
+
+    public function __construct() {
+        parent::__construct();
+
+        //Valida id passado
+        if (isset($_POST['id']) && is_numeric($_POST['id'])){
+            $id = $_POST['id'];
+
+            try {
+                $db = DBAL::getInstance();
+
+                $qb = $db->queryBuilder();
+                $expr = $qb->expr();
+                //Remove Clube
+                $qb->delete('clubes')
+                        ->where($expr->eq('id', ':id'));
+
+                $db->executeQueryBuilder($qb, ['id' => $id]);
+
+                //Limpa ids do clube removido de sócios
+                $qb->update('socios')
+                        ->set('clube_id', $expr->literal(''))
+                        ->where($expr->eq('clube_id', ':id'));
+
+                $db->executeQueryBuilder($qb, ['id' => $id]);
+                Base::flash('Clube removido', 'success');
+
+            } catch (\Exception $e){
+                //$mensagem = 'nok' . $e->getMessage();
+                Base::flash('Erro ao tentar remover Clube. Por favor tente novamente em alguns segundos', 'danger');
+            }
+        }
     }
 }
