@@ -58,6 +58,7 @@ class Config {
         //Basicos
         'root'          => '',
         'css'           => 'static/css/',
+        'erros'         => 'static/erros/',
         'imagens'       => 'static/imagens/',
         'js'            => 'static/js/',
         //modulos

@@ -20,13 +20,13 @@ class CadastroForm extends Form {
         parent::__construct($options);
 
         $this->nome = new StringField([
-            "label" => "Título",
+            "label" => "Nome do Clube",
             "class" => "form-control",
             "validators" => [
-                new InputRequired("Título é obrigatório"),
-                new Length("Título deve ter entre %(min)d e %(max)d caracteres",
+                new InputRequired("Nome do Clube é obrigatório"),
+                new Length("Nome do Clube deve ter entre %(min)d e %(max)d caracteres",
                         ['min' => 2, 'max'=> 100]),
-                new OnlyContains('Título deve conter apenas os caracteres a-z, 0-9, -, _, . e espaços.',
+                new OnlyContains('Nome do Clube deve conter apenas os caracteres a-z, 0-9, -, _, . e espaços.',
                         ['valid_members' => '/[\w\s\-\.]/u']),
                 ],
             ]);

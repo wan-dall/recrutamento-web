@@ -51,8 +51,8 @@
             
             var data = {'id': id};
             
-            if (confirm("Tem certeza que deseja remover o grupo '" + nome + "'?")){
-                enviaForm3(data, '{{ url_grupos }}remove/', $(this), function(){
+            if (confirm("Tem certeza que deseja remover o clube '" + nome + "'?")){
+                enviaForm3(data, '{{ url_clubes }}remove/', $(this), function(){
                     document.location.reload();
                 });
             }

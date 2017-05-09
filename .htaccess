@@ -4,7 +4,7 @@ RewriteEngine on
 #RewriteRule ^(.*)/pag-([0-9]+)/$ $1/?pag=$2
 RewriteRule ^(doc)($|/) - [L]
 
-RewriteRule ^[\/]?$ base/index/ [L]
+RewriteRule ^[\/]?$ clubes/index/ [L]
 
 #geral
 RewriteRule ^([a-z]+)[\/]$ $1/index/ [L]
