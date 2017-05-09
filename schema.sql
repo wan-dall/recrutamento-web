@@ -44,7 +44,7 @@ SET SQL_MODE = '';
 GRANT USAGE ON *.* TO recrutamento_web;
  DROP USER recrutamento_web;
 SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-CREATE USER 'recrutamento_web' IDENTIFIED BY '#php$passwd!';
+CREATE USER 'recrutamento_web'@'localhost' IDENTIFIED BY '#php$passwd!';
 
 GRANT ALL ON `recrutamento-web`.* TO 'recrutamento_web';
 
