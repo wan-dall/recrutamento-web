@@ -62,7 +62,6 @@ class Utils {
             if (isset($campo->render_kw['like-fin'])){
                 $like_fin = '%';
             }
-            //print('Nome: ' . $campo->name . ' value: ' . $campo->data);
             //Ignora campos usados apenas para controle do corpo da query
             //Ex: ordem e status;
             if (isset($campo->render_kw['ignore'])){

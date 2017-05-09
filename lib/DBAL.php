@@ -136,7 +136,6 @@ class DBAL {
         if (count($params)){
             $qb->setParameters($params);
         }
-        //print_r($qb->getSQL());
         return $qb->execute();
     }
 

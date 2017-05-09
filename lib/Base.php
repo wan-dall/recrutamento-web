@@ -45,27 +45,6 @@ class Base {
     protected static $instance;
 
     /**
-     * Teste de tempo de execução
-     *
-     * @internal Debug
-     * @todo Remover quando em produção
-     *
-     * @var integer Tempo inicial da execução 
-     */
-    private static $tempo_ini;
-
-    /**
-     * Teste de tempo de execução
-     *
-     * @internal Debug
-     * @todo Remover quando em produção
-     *
-     * @var integer Tempo final da execução 
-     */
-    private static $tempo_fin;
-
-
-    /**
      * Inicializa ambiente Twig.
      *
      * @param array $templates
@@ -74,9 +53,6 @@ class Base {
      * @see Base::getInstance()
      */
     protected function __construct(array $templates=[]) {
-        //Testes desempenho
-        //TODO: remover
-        self::$tempo_ini = microtime();
 
         //Caminhos básicos do sistema
         self::$loader = new \Twig_Loader_Filesystem();
@@ -151,8 +127,6 @@ class Base {
      * @return Base
      */
     public static function getInstance(array $templates=[]){
-        self::flash('getInstance');
-        //die('teste');
         if (!isset(self::$instance)){
             self::$instance = new Base($templates);
         }
@@ -168,7 +142,6 @@ class Base {
      *      [Twig_tag => valor]
      */
     public static function setValue(array $array){
-        //self::getInstance();
         self::$retorno = array_merge(self::$retorno, $array);
     }
 
@@ -187,13 +160,8 @@ class Base {
      * @see Base::getInstance, Base::_construct
      */
     public static function display($template, array $array = []){
-        //Teste
-        //TODO: remover
-        self::$tempo_fin = microtime();
-        self::setValue(['runtime' => self::$tempo_fin - self::$tempo_ini]);
 
         try {
-            //self::getInstance();
             $templ = self::$Twig->loadTemplate($template);
 
             //Opcao para adicionar array de valores
@@ -213,7 +181,6 @@ class Base {
 
         } catch (Exception $e){
             header("HTTP/1.0 404 Not Found", true, 404);
-            #header("Location: /404.html");
             die;
         }
     }
@@ -264,9 +231,7 @@ class Base {
      * @see Config::$urls
      */
     public static function redirect($destino) {
-        //echo $destino;
         header("location: " . Config::lnk($destino));
-        //Pára processamento
         die;
     }
 
