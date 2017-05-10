@@ -3,8 +3,6 @@
         "deathnerd/php-wtforms":"0.5.2",
         "doctrine/dbal": "^2.5",
         "leaseweb/doctrine-pdo-dblib": "^1.1",
-        "twig/twig": "~1.0",
-        "ext-pdo": "1.0.4dev",
-        "ext-mysql": "^1.0"
+        "twig/twig": "~1.0"
     }
 }
