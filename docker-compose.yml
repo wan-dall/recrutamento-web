@@ -1,0 +1,21 @@
+version: "2"
+
+services:
+
+    php:
+        build: .
+        ports:
+            - "8090:80"
+        volumes:
+            - ./:/var/www/html
+
+
+    db:
+        image: mariadb:10.1
+        environment:
+            - MYSQL_DATABASE=recrutamento-web
+            - MYSQL_USER=recrutamento_web
+            - MYSQL_PASSWORD=pass_web
+            - MYSQL_ROOT_PASSWORD=root
+        volumes:
+            - ./db-schema:/docker-entrypoint-initdb.d

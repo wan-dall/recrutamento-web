@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "46f904047028af09f3377fdcdd00456b",
+    "content-hash": "b8ebd1fb1fd8fe58a1582a2d4ddeb9b7",
     "packages": [
         {
             "name": "deathnerd/php-wtforms",
@@ -832,14 +832,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "ext-pdo": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {
-        "ext-pdo": "1.0.4dev",
-        "ext-mysql": "^1.0"
-    },
+    "platform": [],
     "platform-dev": []
 }

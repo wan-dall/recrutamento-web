@@ -42,31 +42,9 @@ class DBAL {
                 //Base::flash('MySQL', 'success');
                 $conParams = array(
                     'driver' => 'pdo_mysql',
-                    'host' => 'localhost',
+                    'host' => db,
                     'user' => 'recrutamento_web',
-                    'password' => '#php$passwd!',
-                    'dbname' => 'recrutamento-web',
-                    );
-                break;
-
-            case 'PgSQL':
-                //Base::flash('PgSQL', 'success');
-                $conParams = array(
-                    'driver' => 'pdo_pgsql',
-                    'host' => 'localhost',
-                    'user' => 'recrutamento_web',
-                    'password' => '#php$passwd!',
-                    'dbname' => 'recrutamento-web',
-                    );
-                break;
-
-            case 'MSSQL':
-                //Base::flash('SQL', 'success');
-                $conParams = array(
-                    'driverClass' => 'Lsw\DoctrinePdoDblib\Doctrine\DBAL\Driver\PDODblib\Driver',
-                    'host' => 'protheus1.wan-dall.com',
-                    'user' => 'recrutamento_web',
-                    'password' => '#php$passwd!',
+                    'password' => 'pass_web',
                     'dbname' => 'recrutamento-web',
                     );
                 break;

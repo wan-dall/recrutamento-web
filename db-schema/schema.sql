@@ -40,12 +40,6 @@ CREATE TABLE IF NOT EXISTS `recrutamento-web`.`socios` (
   PRIMARY KEY (`id`))
 ENGINE = MyISAM;
 
-SET SQL_MODE = '';
-GRANT USAGE ON *.* TO recrutamento_web;
- DROP USER recrutamento_web;
-SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-CREATE USER 'recrutamento_web'@'localhost' IDENTIFIED BY '#php$passwd!';
-
 GRANT ALL ON `recrutamento-web`.* TO 'recrutamento_web';
 
 SET SQL_MODE=@OLD_SQL_MODE;
