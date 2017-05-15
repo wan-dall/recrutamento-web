@@ -15,7 +15,7 @@ class Config {
      * @var array
      */
     protected static $caminhos = [
-        'url' => 'http://localhost/recrutamento-web/',
+        'url' => 'http://localhost:8090/',
         #'url' => 'http://recrutamento-web.wan-dall.com/',
         'abs' => __DIR__ . '/../',
         #'abs' => '/var/www/html/recrutamento-web/',
@@ -99,7 +99,6 @@ class Config {
      * @see Config::$urls, Config::caminhos
      */
     public static function lnk($indice) {
-        echo self::$caminhos['url'] . self::$urls[$indice];
         return self::$caminhos['url'] . self::$urls[$indice];
     }
 
